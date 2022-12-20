@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib\\flutter_widgetlari.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib\\flutter_widgetlari.dart"
+        }
+    ]
+}
