@@ -84,13 +84,37 @@ class _ListViewBuilderPageState extends State<ListViewBuilderPage> {
                         switch (secilen) {
                           case 1:
                             print("case 1");
-                            var result = ulkeler.removeAt(indeks);
-                            setState(() {});
-                            //üstteki değere göre bir tane remove yaptığımız zaan alttaki setstate boşluk değer yapsa bile yeniliyor sayfayı
-                            // ulkeler.remove("Almanya"); O İSİMDEKİNİ SİL
-                            result != null ? kontrolc = "Başarılı bir şekilde silindi!":kontrolc = "Hata!!";
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(kontrolc!)));
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text("Emin misiniz"),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Hayır")),
+                                      TextButton(
+                                          onPressed: () {
+                                            var result =
+                                                ulkeler.removeAt(indeks);
+                                            setState(() {});
+                                            //üstteki değere göre bir tane remove yaptığımız zaan alttaki setstate boşluk değer yapsa bile yeniliyor sayfayı
+                                            // ulkeler.remove("Almanya"); O İSİMDEKİNİ SİL
+                                            result != null
+                                                ? kontrolc =
+                                                    "Başarılı bir şekilde silindi!"
+                                                : kontrolc = "Hata!!";
+                                            Navigator.pop(context);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    content: Text(kontrolc!)));
+                                          },
+                                          child: Text("Evet")),
+                                    ],
+                                  );
+                                });
                             break;
                           case 2:
                             print("${ulkeler[indeks]} Güncellendi");
